@@ -1,0 +1,60 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<h1 align="center">Wacky Widgets</h1>
+{% if widgets %}
+<table align="center">
+<table id="table_id" class="table table-hover" >
+    <thead>
+        <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Delete</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for widget in widgets %}
+
+          {% if widget.length == 0 %} 
+        <tr>
+            <td class="striker">{{widget.description}}</td>
+            <td>
+            </td>
+            <td>
+              
+            </td> 
+        </tr>
+
+        {% else %}
+        <tr>
+            <td>{{widget.description}}</td>
+            <td>{{widget.quantity}}</td>
+            
+            <td></td>
+                
+            </td>
+            <td>
+
+                
+                <a href="{% url 'delete' widget.id %}" class="btn btn-dark red">X</a>
+            </td>
+        </tr>
+        {% endif %}
+
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h3 align="center">No Widgets Exist</h3>
+{% endif %}
+<hr>
+<h4 align="center">Add Widget</h4>
+<form class="col" method="POST">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" style="center" type="search" placeholder="Add Description" aria-label="Search" name="description"><br>
+    <input class="form-control mr-sm-2" type="search" placeholder="Add Quantity" aria-label="Search" name="quantity"><br>
+    <button class="btn btn grey" type="submit">ADD WIDGET</button><br>
+</form>
+
+{% endblock %}
